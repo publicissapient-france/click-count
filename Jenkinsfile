@@ -11,7 +11,7 @@ pipeline {
       }
       steps {
         sh 'mvn clean package'
-        archiveArtifacts(artifacts: 'clickCount.war', caseSensitive: true)
+        archiveArtifacts(artifacts: 'target/clickCount.war', caseSensitive: true)
       }
     }
   }
