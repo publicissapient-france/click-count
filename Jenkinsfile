@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('Build') {
+    stage('Build & Package') {
       agent {
         docker {
           image 'maven:3-alpine'
@@ -11,13 +11,8 @@ pipeline {
       }
       steps {
         sh 'mvn clean package'
+        sh 'docker build -f docker/runtime/Dockerfile -t click-count target'
         archiveArtifacts(artifacts: 'target/clickCount.war', caseSensitive: true)
-      }
-    }
-    stage('Package') {
-      steps {
-        sh '''
-pwd; docker build -f docker/runtime/Dockerfile -t click-count target'''
       }
     }
   }
