@@ -16,7 +16,8 @@ pipeline {
     }
     stage('Package') {
       steps {
-        sh 'docker build -f docker/runtime/Dockerfile -t click-count target'
+        sh '''
+pwd; docker build -f docker/runtime/Dockerfile -t click-count target'''
       }
     }
   }
