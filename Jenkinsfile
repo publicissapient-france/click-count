@@ -14,5 +14,10 @@ pipeline {
         archiveArtifacts(artifacts: 'target/clickCount.war', caseSensitive: true)
       }
     }
+    stage('Package') {
+      steps {
+        sh 'docker build -f docker/runtime/Dockerfile -t click-count target'
+      }
+    }
   }
 }
