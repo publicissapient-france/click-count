@@ -16,8 +16,9 @@ pipeline {
     }
     stage('Package') {
       steps {
-        sh 'printenv'
-        sh 'docker build -f docker/runtime/Dockerfile -t click-count ${JENKINS_HOME}/jobs/click-count/branches/${GIT_BRANCH}/builds/${BUILD_NUMBER}/archive/target'
+        sh 'mkdir -p target && cp ${JENKINS_HOME}/jobs/click-count/branches/${GIT_BRANCH}/builds/${BUILD_NUMBER}/archive/target/* target/'
+        sh 'docker build -f docker/runtime/Dockerfile -t click-count target'
+        sh 'rm -f target/*'
       }
     }
   }
