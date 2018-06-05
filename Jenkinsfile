@@ -16,9 +16,9 @@ pipeline {
     }
     stage('Package') {
       steps {
-        sh 'mkdir -p target && cp ${JENKINS_HOME}/jobs/click-count/branches/${GIT_BRANCH}/builds/${BUILD_NUMBER}/archive/target/* target/'
-        sh 'docker build -f docker/runtime/Dockerfile -t click-count target'
-        sh 'rm -f target/*'
+        sh 'cp ${JENKINS_HOME}/jobs/click-count/branches/${GIT_BRANCH}/builds/${BUILD_NUMBER}/archive/target/*.war docker/runtime/'
+        sh 'docker build -f docker/runtime/Dockerfile -t click-count docker/runtime'
+        sh 'rm -f docker/runtime/*.war'
       }
     }
   }
