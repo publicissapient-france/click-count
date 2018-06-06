@@ -21,7 +21,7 @@ pipeline {
         sh 'rm -f docker/runtime/*.war'
       }
     }
-    stage('Staging deployment') {
+    stage('Staging') {
       steps {
         sh 'docker run -d  -p 8088:8080 -e XEBIA_CLICK_COUNT_REDIS_HOST=35.156.31.64 -e XEBIA_CLICK_COUNT_REDIS_PORT=6379  --name click-count-test click-count'
       }
@@ -33,6 +33,11 @@ pipeline {
         }
 
         sh 'docker run --rm --name click-count-api-test click-count-api-test'
+      }
+    }
+    stage('Production') {
+      steps {
+        sh 'docker run -d  -p 80:8080 -e XEBIA_CLICK_COUNT_REDIS_HOST=18.184.113.138 -e XEBIA_CLICK_COUNT_REDIS_PORT=6379  --name click-count click-count'
       }
     }
   }
