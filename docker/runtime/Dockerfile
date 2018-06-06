@@ -1,5 +1,7 @@
 FROM tomcat:8.5-jre8-alpine
 
+LABEL maintainer "capuchon.dev@gmail.com"
+
 # Set environment variables.
 ENV LANG=en_US.UTF-8
 

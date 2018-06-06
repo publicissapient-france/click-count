@@ -1,5 +1,7 @@
 FROM alpine:3.7
 
+LABEL maintainer "capuchon.dev@gmail.com"
+
 # Set environment variables.
 ENV LANG=en_US.UTF-8 \
     JAVA_ALPINE_VERSION=8.151.12-r0
