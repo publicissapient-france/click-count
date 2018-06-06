@@ -7,4 +7,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY ./*.py ./
 
-CMD [ "python", "./TestClickCountAPI.py", "--webappAddr", "http://34.245.196.183" ]
+CMD [ "python", "./TestClickCountAPI.py", "--webappAddr", "http://34.245.196.183", "--webappPort", "8088" ]
