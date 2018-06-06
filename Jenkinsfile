@@ -32,7 +32,7 @@ pipeline {
           sh 'docker build -t click-count-api-test .'
         }
 
-        sh 'docker run -it --rm --name click-count-api-test click-count-api-test'
+        sh 'docker run --rm --name click-count-api-test click-count-api-test'
       }
     }
   }
