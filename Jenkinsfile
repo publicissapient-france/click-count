@@ -24,6 +24,7 @@ pipeline {
     stage('Staging') {
       steps {
         sh 'docker run -d  -p 8088:8080 -e XEBIA_CLICK_COUNT_REDIS_HOST=35.156.31.64 -e XEBIA_CLICK_COUNT_REDIS_PORT=6379  --name click-count-test click-count'
+        sleep 5
       }
     }
     stage('Staging test') {
