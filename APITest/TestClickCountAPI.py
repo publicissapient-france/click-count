@@ -8,6 +8,7 @@ import requests
 _WEBAPP_ADDR = None
 _WEBAPP_PORT = 80
 
+
 class TestClickCountAPI(unittest.TestCase):
 
     def setUp( self ):
