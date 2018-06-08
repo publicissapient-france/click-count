@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  options {
+    disableConcurrentBuilds()
+  }
   stages {
     stage('Build') {
       agent {
@@ -7,7 +10,6 @@ pipeline {
           image 'maven:3-alpine'
           args '-v /root/.m2:/root/.m2'
         }
-
       }
       steps {
         sh 'mvn clean package'
@@ -38,6 +40,9 @@ pipeline {
       }
     }
     stage('Production') {
+      when {
+        branch 'master'
+      }
       steps {
         sh 'set +e; docker stop click-count-${GIT_BRANCH}; docker rm click-count-${GIT_BRANCH}; set -e'
         sh 'docker run -d  -p 80:8080 -e XEBIA_CLICK_COUNT_REDIS_HOST=18.184.113.138 -e XEBIA_CLICK_COUNT_REDIS_PORT=6379  --name click-count-${GIT_BRANCH} click-count-${GIT_BRANCH}'
