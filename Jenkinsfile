@@ -36,7 +36,10 @@ pipeline {
           sh 'docker build -t click-count-api-test-${GIT_BRANCH} .'
         }
 
-        sh 'docker run --rm --name click-count-api-test-${GIT_BRANCH} --env WEBAPP_ADDR="http://localhost" --env WEBAPP_PORT=8088 click-count-api-test-${GIT_BRANCH}'
+        sh '''
+          STAGE_IP = `docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" click-count-test-${GIT_BRANCH}`
+          docker run --rm --name click-count-api-test-${GIT_BRANCH} --env WEBAPP_ADDR="http://${STAGE_IP}" --env WEBAPP_PORT=8088 click-count-api-test-${GIT_BRANCH}
+        '''
       }
     }
     stage('Production') {
