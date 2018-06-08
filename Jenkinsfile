@@ -26,7 +26,7 @@ pipeline {
     stage('Staging') {
       steps {
         sh 'set +e; docker stop click-count-test-${GIT_BRANCH}; docker rm click-count-test-${GIT_BRANCH}; set -e'
-        sh 'docker run -d  -p 8088:8080 -e XEBIA_CLICK_COUNT_REDIS_HOST=35.156.31.64 -e XEBIA_CLICK_COUNT_REDIS_PORT=6379  --name click-count-test-${GIT_BRANCH} click-count-${GIT_BRANCH}'
+        sh 'docker run -d -e XEBIA_CLICK_COUNT_REDIS_HOST=35.156.31.64 -e XEBIA_CLICK_COUNT_REDIS_PORT=6379  --name click-count-test-${GIT_BRANCH} click-count-${GIT_BRANCH}'
         sleep 5
       }
     }
@@ -47,8 +47,8 @@ pipeline {
         branch 'master'
       }
       steps {
-        sh 'set +e; docker stop click-count-${GIT_BRANCH}; docker rm click-count-${GIT_BRANCH}; set -e'
-        sh 'docker run -d  -p 80:8080 -e XEBIA_CLICK_COUNT_REDIS_HOST=18.184.113.138 -e XEBIA_CLICK_COUNT_REDIS_PORT=6379  --name click-count-${GIT_BRANCH} click-count-${GIT_BRANCH}'
+        sh 'set +e; docker stop click-count; docker rm click-count; set -e'
+        sh 'docker run -d -p 80:8080 -e XEBIA_CLICK_COUNT_REDIS_HOST=18.184.113.138 -e XEBIA_CLICK_COUNT_REDIS_PORT=6379 --name click-count click-count-${GIT_BRANCH}'
       }
     }
   }
