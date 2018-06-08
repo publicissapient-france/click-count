@@ -34,7 +34,7 @@ pipeline {
           sh 'docker build -t click-count-api-test .'
         }
 
-        sh 'docker run --rm --name click-count-api-test click-count-api-test'
+        sh 'docker run --rm --name click-count-api-test --env WEBAPP_ADDR="http://localhost" --env WEPAPP_PORT=8088 click-count-api-test'
       }
     }
     stage('Production') {
