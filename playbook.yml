@@ -1,0 +1,27 @@
+- name: "Setup environment on Remote Server"
+  hosts: all
+  gather_facts: False
+  remote_user: ubuntu
+  tasks:
+
+    - name: "Wait for SSH setup"
+      wait_for:
+        port: 22
+        host: '{{ inventory_hostname }}'
+        search_regex: OpenSSH
+        delay: 10
+        timeout: 600
+      vars:
+        ansible_connection: local
+ 
+    - name: "Install Java and Tomcat"
+      raw: sudo apt update && sudo apt install -y tomcat9 tomcat9-admin openjdk-8-jdk
+      ignore_errors: true
+      register: req_result
+      changed_when: "req_result.stdout is not search('0 newly installed') or req_result.stdout is not search('already installed')"
+
+    - name: Copy tomcat users file
+      become: true
+      template:
+        src: templates/tomcat-users.xml
+        dest: /etc/tomcat9/tomcat-users.xml

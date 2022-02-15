@@ -73,6 +73,15 @@ resource "aws_default_security_group" "default" {
   }
 }
 
+resource "local_file" "staging" {
+  content = aws_instance.staging-app.public_ip
+  filename = ".staging"
+}
+
+resource "local_file" "production" {
+  content = aws_instance.production-app.public_ip
+  filename = ".production"
+}
 # resource "aws_elasticache_cluster" "staging-cache" {
 #   cluster_id           = "cluster-staging"
 #   engine               = "redis"
