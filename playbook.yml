@@ -15,7 +15,7 @@
         ansible_connection: local
  
     - name: "Install Java and Tomcat"
-      raw: sudo apt update && sudo apt install -y tomcat9 tomcat9-admin openjdk-8-jdk
+      raw: sudo apt update && sudo apt install -y tomcat9 tomcat9-admin openjdk-8-jdk redis
       ignore_errors: true
       register: req_result
       changed_when: "req_result.stdout is not search('0 newly installed') or req_result.stdout is not search('already installed')"

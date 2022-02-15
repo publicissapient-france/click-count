@@ -82,22 +82,3 @@ resource "local_file" "production" {
   content = aws_instance.production-app.public_ip
   filename = ".production"
 }
-# resource "aws_elasticache_cluster" "staging-cache" {
-#   cluster_id           = "cluster-staging"
-#   engine               = "redis"
-#   node_type            = "cache.t2.micro"
-#   num_cache_nodes      = 1
-#   parameter_group_name = "default.redis3.2"
-#   engine_version       = "3.2.10"
-#   port                 = 6379
-# }
-
-# resource "aws_elasticache_cluster" "production-cache" {
-#   cluster_id           = "cluster-production"
-#   engine               = "redis"
-#   node_type            = "cache.t2.micro"
-#   num_cache_nodes      = 1
-#   parameter_group_name = "default.redis3.2"
-#   engine_version       = "3.2.10"
-#   port                 = 6379
-# }
