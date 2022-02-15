@@ -28,8 +28,8 @@ jobs:
       if: github.ref == 'refs/heads/master'
       
     - name: Set environment variable for staging
-      run: echo "TARGET_DEPLOY=$(cat .production)" >> $GITHUB_ENV
+      run: echo "TARGET_DEPLOY=$(cat .staging)" >> $GITHUB_ENV
       if: github.ref == 'refs/heads/staging'
       
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn tomcat7:deploy
