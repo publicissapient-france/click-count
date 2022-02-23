@@ -74,6 +74,19 @@
 
     <build>
         <finalName>clickCount</finalName>
+        <plugins>
+<plugin>
+    <groupId>org.apache.tomcat.maven</groupId>
+    <artifactId>tomcat7-maven-plugin</artifactId>
+    <version>2.2</version>
+    <configuration>
+        <url>http://${env.TARGET_DEPLOY}:8080/manager/text</url>
+        <username>deploy</username>
+        <password>deploy</password>
+        <path>/clickCount</path>
+    </configuration>
+</plugin>
+</plugins>
     </build>
 
 </project>
